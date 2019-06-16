@@ -1,0 +1,22 @@
+db: # since：v1.1.0
+  url: jdbc:mysql://localhost:3306/catering
+  username: root
+  password: root
+
+author: lhm
+packageName: com.greedystar.generator
+path:
+  controller: buildModel
+  service: buildModel
+  interf: buildModel # since：v1.2.1
+  dao: buildModel
+  entity: buildModel
+  mapper: mappers
+
+
+## oracle
+#db: # since：v1.1.0
+#  url: jdbc:oracle:thin:@
+#  username:
+#  password:
+

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greedystar.generator.buildModel.ProductInfoDao">
+
+    <resultMap id="productInfoResultMap" type="com.greedystar.generator.buildModel.ProductInfo">
+        <id column="productId" property="productId"/> 
+        <result column="productName" property="productName"/> 
+        <result column="productPrice" property="productPrice"/> 
+        <result column="productStock" property="productStock"/> 
+        <result column="productDescription" property="productDescription"/> 
+        <result column="productIcon" property="productIcon"/> 
+        <result column="productStatus" property="productStatus"/> 
+        <result column="categoryType" property="categoryType"/> 
+        <result column="createTime" property="createTime"/> 
+        <result column="updateTime" property="updateTime"/> 
+
+        
+        
+    </resultMap>
+
+    <sql id="productInfoColumns">
+        product_info.product_id AS "productId",
+        product_info.product_name AS "productName",
+        product_info.product_price AS "productPrice",
+        product_info.product_stock AS "productStock",
+        product_info.product_description AS "productDescription",
+        product_info.product_icon AS "productIcon",
+        product_info.product_status AS "productStatus",
+        product_info.category_type AS "categoryType",
+        product_info.create_time AS "createTime",
+        product_info.update_time AS "updateTime"
+    </sql>
+
+    <sql id="productInfoJoins">
+        
+    </sql>
+
+    <select id="get" resultMap="productInfoResultMap">
+        SELECT
+        <include refid="productInfoColumns" />
+        FROM product_info <include refid="productInfoJoins" />
+        <where>
+        product_info.product_id = #{id}
+        </where>
+    </select>
+
+    <select id="findList" resultMap="productInfoResultMap">
+        SELECT
+        <include refid="productInfoColumns" />
+        FROM product_info <include refid="productInfoJoins" />
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="productInfoResultMap">
+        SELECT
+        <include refid="productInfoColumns" />
+        FROM product_info <include refid="productInfoJoins" />
+        <where>
+        </where>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO product_info(
+            product_id,
+            product_name,
+            product_price,
+            product_stock,
+            product_description,
+            product_icon,
+            product_status,
+            category_type,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{productId},
+            #{productName},
+            #{productPrice},
+            #{productStock},
+            #{productDescription},
+            #{productIcon},
+            #{productStatus},
+            #{categoryType},
+            #{createTime},
+            #{updateTime}
+        )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO product_info(
+            product_id,
+            product_name,
+            product_price,
+            product_stock,
+            product_description,
+            product_icon,
+            product_status,
+            category_type,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="productInfo" separator =",">
+        (
+            #{productInfo.productId},
+            #{productInfo.productName},
+            #{productInfo.productPrice},
+            #{productInfo.productStock},
+            #{productInfo.productDescription},
+            #{productInfo.productIcon},
+            #{productInfo.productStatus},
+            #{productInfo.categoryType},
+            #{productInfo.createTime},
+            #{productInfo.updateTime}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update">
+        UPDATE product_info SET
+        product_id = #{productId},
+        product_name = #{productName},
+        product_price = #{productPrice},
+        product_stock = #{productStock},
+        product_description = #{productDescription},
+        product_icon = #{productIcon},
+        product_status = #{productStatus},
+        category_type = #{categoryType},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE product_id = #{productId}
+    </update>
+
+    <update id="delete">
+        DELETE FROM product_info
+        WHERE product_id = #{productId}
+    </update>
+
+</mapper>
